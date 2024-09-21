@@ -1,28 +1,26 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Stacked area chart for Body Mass Index (BMI) categories (Underweight, Healthy, Overweight/Obese) across regions and World (2000-2016) with BMI category text annotations at the end of the chart.",
+  "description": "Stacked area chart for Body Mass Index (BMI) categories (Underweight, Healthy, Overweight/Obese) across continents and World (2000-2014) with BMI category text annotations at the end of the chart.",
   "data": {
-    "url": "https://raw.githubusercontent.com/mmio0004/DV2/main/data/Wide_Format_Men_Weight_Data_by_Region_and_All_Countries__2000-2014_.csv"
+    "url": "https://raw.githubusercontent.com/mmio0004/W10Homework/main/data/Transformed_Men_Weight_Categories_by_Continent.csv"
   },
   "params": [
     {
-      "name": "SelectedRegion",
-      "value": "All Regions",
+      "name": "SelectedContinent",
+      "value": "All Continents",
       "bind": {
         "input": "select",
         "options": [
-          "All Regions",
-          "Africa", "Caribbean", "Central America", "Central Asia", 
-          "Eastern Asia", "Europe", "Northern America", "Oceania", "South America", 
-          "South-eastern Asia", "Southern Asia", "Western Asia"
+          "All Continents",
+          "Asia", "Africa", "North America", "South America", "Europe", "Oceania"
         ],
-        "name": "Select Region: "
+        "name": "Select Continent: "
       }
     }
   ],
   "transform": [
     {
-      "filter": "SelectedRegion == 'All Regions' ? true : datum.Region == SelectedRegion"
+      "filter": "SelectedContinent == 'All Continents' ? true : datum.Region == SelectedContinent"
     },
     {
       "aggregate": [
