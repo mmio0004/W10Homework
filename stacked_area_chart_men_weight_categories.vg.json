@@ -81,7 +81,7 @@
         "y": {
           "field": "value",
           "type": "quantitative",
-          "title": "Proportion of Males (%)",
+          "title": "Proportion of Men (%)",
           "stack": "normalize",
           "axis": {
                     "format": "%"
