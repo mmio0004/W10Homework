@@ -1,0 +1,114 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Stacked area chart for Body Mass Index (BMI) categories (Underweight, Healthy, Overweight/Obese) across regions and World (2000-2016).",
+    "data": {
+      "url": "https://raw.githubusercontent.com/mmio0004/DV2/main/data/Corrected_Transformed_Women_Weight_Data_by_Region_and_All_Countries__2000-2014_.csv"
+    },
+    "params": [
+      {
+        "name": "SelectedRegion",
+        "value": "All Regions",
+        "bind": {
+          "input": "select",
+          "options": [
+            "All Regions",
+            "Africa", "Caribbean", "Central America", "Central Asia", 
+            "Eastern Asia", "Europe", "Northern America", "Oceania", "South America", 
+            "South-eastern Asia", "Southern Asia", "Western Asia"
+          ],
+          "name": "Select Region: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "SelectedRegion == 'All Regions' ? true : datum.Region == SelectedRegion"
+      },
+      {
+        "aggregate": [
+          {"op": "mean", "field": "Healthy (NCDRisC (2017))", "as": "Healthy"},
+          {"op": "mean", "field": "Overweight or Obese (NCDRisC (2017))", "as": "Overweight"},
+          {"op": "mean", "field": "Underweight (NCDRisC (2017))", "as": "Underweight"}
+        ],
+        "groupby": ["Year"]
+      },
+      {
+        "fold": [
+          "Healthy",
+          "Overweight",
+          "Underweight"
+        ],
+        "as": ["BMI Category", "value"]
+      }
+    ],
+    "mark": {
+      "type": "area",
+      "stroke": "black",
+      "strokeWidth": {
+        "condition": {
+          "param": "select",
+          "empty": false,
+          "value": 3
+        },
+        "value": 1
+      }
+    },
+    "selection": {
+      "highlight": {
+        "type": "single",
+        "fields": ["BMI Category"],  
+        "on": "mouseover",
+        "empty": "none",
+        "clear": "mouseout"
+      },
+      "select": {
+        "type": "multi",
+        "fields": ["BMI Category"], 
+        "on": "click",
+        "empty": "none"
+      }
+    },
+    "encoding": {
+      "x": {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      "y": {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Proportion of Males (%)",
+        "stack": "normalize"
+      },
+      "color": {
+        "field": "BMI Category",
+        "type": "nominal",
+        "title": "Body Mass Index (BMI) Category",
+        "scale": {
+          "scheme": "category10"
+        }
+      },
+      "fillOpacity": {
+        "condition": [
+          {
+            "param": "select",
+            "empty": false,
+            "value": 1
+          },
+          {
+            "param": "highlight",
+            "empty": false,
+            "value": 2
+          }
+        ],
+        "value": 0.8
+      },
+      "tooltip": [
+        {"field": "Year", "type": "ordinal", "title": "Year"},
+        {"field": "BMI Category", "type": "nominal", "title": "Body Mass Index (BMI) Category"},
+        {"field": "value", "type": "quantitative", "title": "Proportion of Males (%)", "format": ".1f"}
+      ]
+    },
+    "width": 600,
+    "height": 300
+  }  

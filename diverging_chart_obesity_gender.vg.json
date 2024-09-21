@@ -1,0 +1,154 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/mmio0004/DV2/main/data/Transformed_Obesity_Dataset_with_Regions.csv"
+    },
+    "params": [
+      {
+        "name": "SelectedRegion",
+        "value": "All Regions",
+        "bind": {
+          "input": "select",
+          "options": [
+            "All Regions", "Africa", "Caribbean", "Central America", "Central Asia", 
+            "Eastern Asia", "Europe", "Northern America", "Oceania", "South America", 
+            "South-eastern Asia", "Southern Asia", "Western Asia"
+          ],
+          "name": "Select Region: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "SelectedRegion == 'All Regions' ? datum.Region == 'All Countries' : datum.Region == SelectedRegion"
+      }
+    ],
+    "spacing": 10,
+    "hconcat": [
+      {
+        "transform": [{"filter": {"field": "Gender", "equal": "Female"}}],
+        "params": [
+          {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover"}
+          },
+          {
+            "name": "select",
+            "select": "point"
+          }
+        ],
+        "mark": {
+          "type": "bar",
+          "stroke": "lightgray"
+        },
+        "title": {
+          "text": "Female",
+          "align": "center",
+          "baseline": "bottom",
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "y": {
+            "field": "Year",
+            "type": "ordinal",
+            "axis": null
+          },
+          "x": {
+            "field": "Obesity_Rate",
+            "type": "quantitative",
+            "title": "Obesity Prevalence Rate (%)",
+            "scale": {"reverse": true},
+            "axis": {"format": "s"}
+          },
+          "color": {
+            "value": "#ff7f0e",
+            "legend": null
+          },
+          "fillOpacity": {
+            "condition": {"param": "select", "value": 1},
+            "value": 0.3
+          },
+          "strokeWidth": {
+            "condition": [
+              {"param": "select", "empty": false, "value": 3},
+              {"param": "highlight", "empty": false, "value": 2}
+            ],
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Gender", "type": "nominal", "title": "Gender"},
+            {"field": "Year", "type": "ordinal", "title": "Year"},
+            {"field": "Obesity_Rate", "type": "quantitative", "title": "Obesity Prevalence Rate (%)"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "text", "align": "center"},
+        "encoding": {
+          "y": {"field": "Year", "type": "ordinal", "axis": null},
+          "text": {"field": "Year", "type": "ordinal"}
+        }
+      },
+      {
+        "transform": [{"filter": {"field": "Gender", "equal": "Male"}}],
+        "params": [
+          {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover"}
+          },
+          {
+            "name": "select",
+            "select": "point"
+          }
+        ],
+        "mark": {
+          "type": "bar",
+          "stroke": "lightgray"
+        },
+        "title": {
+          "text": "Male",
+          "align": "center",
+          "baseline": "bottom",
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "y": {
+            "field": "Year",
+            "type": "ordinal",
+            "axis": null
+          },
+          "x": {
+            "field": "Obesity_Rate",
+            "type": "quantitative",
+            "title": "Obesity Prevalence Rate (%)",
+            "scale": {},
+            "axis": {"format": "s"}
+          },
+          "color": {
+            "value": "#9467bd",
+            "legend": null
+          },
+          "fillOpacity": {
+            "condition": {"param": "select", "value": 1},
+            "value": 0.3
+          },
+          "strokeWidth": {
+            "condition": [
+              {"param": "select", "empty": false, "value": 3},
+              {"param": "highlight", "empty": false, "value": 2}
+            ],
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Gender", "type": "nominal", "title": "Gender"},
+            {"field": "Year", "type": "ordinal", "title": "Year"},
+            {"field": "Obesity_Rate", "type": "quantitative", "title": "Obesity Prevalence Rate (%)"}
+          ]
+        }
+      }
+    ],
+    "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false}
+    }
+}
