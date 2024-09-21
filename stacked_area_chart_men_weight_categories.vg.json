@@ -85,7 +85,8 @@
           "type": "nominal",
           "title": "Body Mass Index (BMI) Category",
           "scale": {
-            "scheme": "category10"
+            "domain": ["Healthy", "Overweight", "Underweight"],
+            "range": ["#2ca02c", "#ff7f0e", "#1f77b4"]
           },
           "legend": {
             "orient": "right",
