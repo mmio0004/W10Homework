@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Trends in Body Mass Index (BMI) Categories Among Males by Continent (2000-2014)",
   "description": "Stacked area chart for Body Mass Index (BMI) categories (Underweight, Healthy, Overweight/Obese) across continents and World (2000-2014) with BMI category text annotations at the end of the chart.",
   "data": {
     "url": "https://raw.githubusercontent.com/mmio0004/W10Homework/main/data/Men_Weight_Categories_with_Americas_Combined.csv"
