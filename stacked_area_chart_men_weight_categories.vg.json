@@ -82,7 +82,10 @@
           "field": "value",
           "type": "quantitative",
           "title": "Proportion of Males (%)",
-          "stack": "normalize"
+          "stack": "normalize",
+          "axis": {
+                    "format": "%"
+                  }
         },
         "color": {
           "field": "BMI Category",
@@ -115,7 +118,7 @@
         "tooltip": [
           {"field": "Year", "type": "ordinal", "title": "Year"},
           {"field": "BMI Category", "type": "nominal", "title": "Body Mass Index (BMI) Category"},
-          {"field": "value", "type": "quantitative", "title": "Proportion of Males (%)", "format": ".2f"}
+          {"field": "value", "type": "quantitative", "title": "Proportion of Men (%)", "format": ".2f"}
         ]
       }
     },
