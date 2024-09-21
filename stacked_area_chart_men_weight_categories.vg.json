@@ -81,7 +81,7 @@
         "y": {
           "field": "value",
           "type": "quantitative",
-          "title": "Proportion of Men (%)",
+          "title": "Normalized Proportion of Men (%)",
           "stack": "normalize",
           "axis": {
                     "format": "%"
@@ -118,7 +118,7 @@
         "tooltip": [
           {"field": "Year", "type": "ordinal", "title": "Year"},
           {"field": "BMI Category", "type": "nominal", "title": "Body Mass Index (BMI) Category"},
-          {"field": "value", "type": "quantitative", "title": "Proportion of Men (%)", "format": ".2f"}
+          {"field": "value", "type": "quantitative", "title": "Normalized Proportion (%)", "format": ".2f"}
         ]
       }
     },
